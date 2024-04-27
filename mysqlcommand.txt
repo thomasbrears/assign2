@@ -1,0 +1,16 @@
+CREATE TABLE bookings (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cname VARCHAR(255) NOT NULL,
+    phone VARCHAR(255) NOT NULL,
+    unumber VARCHAR(255),
+    snumber VARCHAR(255) NOT NULL,
+    stname VARCHAR(255) NOT NULL,
+    sbname VARCHAR(255),
+    dsbname VARCHAR(255),
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    status VARCHAR(50) DEFAULT 'unassigned',
+    booking_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO bookings (cname, phone, snumber, stname, sbname, dsbname, date, time) VALUES ('$cname', '$phone', '$snumber', '$stname', '$sbname', '$dsbname', '$date', '$time')
