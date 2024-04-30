@@ -12,5 +12,8 @@ CREATE TABLE bookings (
     status VARCHAR(50) DEFAULT 'unassigned',
     booking_datetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-INSERT INTO bookings (cname, phone, snumber, stname, sbname, dsbname, date, time) VALUES ('$cname', '$phone', '$snumber', '$stname', '$sbname', '$dsbname', '$date', '$time')
+INSERT INTO bookings (cname, phone, snumber, stname, sbname, dsbname, unumber, date, time) VALUES ('$cname', '$phone', '$snumber', '$stname', '$sbname', '$dsbname', '$unumber', '$date', '$time')
+SET time_zone = '+12:00'
+SELECT * FROM bookings WHERE id = '$numericId'
+SELECT * FROM bookings WHERE status='unassigned' AND STR_TO_DATE(CONCAT(date, ' ', time), '%Y-%m-%d %H:%i:%s') BETWEEN '$currentDateTimeFormatted' AND '$twoHoursLaterFormatted'
+UPDATE bookings SET status='assigned' WHERE id = '$numericId' AND status != 'assigned'

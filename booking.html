@@ -14,74 +14,74 @@
 		<link rel="stylesheet" href="style.css">
 		<!-- Java Script files -->
 		<script src="script.js" defer></script>
-        <script src="booking.js"></script>
+		<script src="booking.js"></script>
 	</head>
     
-    <body>
-	   <!-- Navigation Bar -->
-        <nav id="navbar">
-          <div class="nav-container">
-            <span class="brand-name"> CabsOnline </span>
-            <div class="menu-icon" onclick="toggleMenu()">
-              <i class="fa fa-bars"></i>
-            </div>
-            <div class="nav-links">
-              <a href="about.html">About</a>
-              <a href="admin.html">Admin</a>
-              <a target="_blank" href="github.com/thomasbrears/assign2">Github Repo</a>
-            </div>
-          </div>
-        </nav>
+	<body>
+		<!-- Navigation Bar -->
+		<nav id="navbar">
+			<div class="nav-container">
+				<span class="brand-name"> CabsOnline </span>
+				<div class="menu-icon" onclick="toggleMenu()">
+					<i class="fa fa-bars"></i>
+				</div>
+				<div class="nav-links">
+					<a target="_blank" href="readme.txt">About</a>
+					<a href="admin.html">Admin</a>
+					<a target="_blank" href="https://github.com/thomasbrears/assign2">Github Repo</a>
+				</div>
+			</div>
+		</nav>
         
-        <div class="content">
-            <h2>Book a Taxi</h2>
-            <p style="text-align: center">Please fill out the form below to book a taxi service. Fields marked with * are required.</p>
-            <!-- Success Message Placeholder -->
-            <div id="reference" class="success-message" style="display: none;"></div>
-            <!-- Error Message Placeholder -->
-            <div id="errorMessage" class="error-message" style="display: none;"></div>
-            <form id="bookingForm" class="booking-form" method="post">
-                <h3>Customer Details</h3>
-                <label for="cname">Customer Name*:</label>
-                <input type="text" id="cname" name="cname" required pattern="^[a-zA-Z]{2,}\s[a-zA-Z]{2,}$" title="Please enter your first and last name. Only characters are accepted">
-                <label for="phone">Phone Number*:</label>
-                <input type="text" id="phone" name="phone" pattern="[0-9]{10,12}" required title="Please enter a valid phone number with 10 to 12 digits.">
-
+		<div class="content">
+			<h2>Book a Taxi</h2>
+			<p style="text-align: center">Please fill out the form below to book a taxi service. Fields marked with * are required.</p>
+			<div id="reference" class="success-message" style="display: none;"></div><!-- Success Message Placeholder -->
+			<div id="errorMessage" class="error-message" style="display: none;"></div><!-- Error Message Placeholder -->
+			
+			<!-- Booking Form -->
+			<form id="bookingForm" class="booking-form" method="post">
+				<h3>Customer Details</h3>
+				<label for="cname">Customer Name*:</label>
+				<input type="text" id="cname" name="cname" required pattern="^[a-zA-Z]{2,}\s[a-zA-Z]{2,}$" title="Please enter your first and last name. Only characters are accepted">
+				<label for="phone">Phone Number*:</label>
+				<input type="text" id="phone" name="phone" pattern="[0-9]{10,12}" required title="Please enter a valid phone number with 10 to 12 digits.">
+				
                 <h3>Pickup Details</h3>
-                <label for="unumber">Unit Number:</label>
-                <input type="text" id="unumber" name="unumber">
-                <label for="snumber">Street Number*:</label>
-                <input type="text" id="snumber" name="snumber" required title="Please enter a street number.">
-                <label for="stname">Street Name*:</label>
-                <input type="text" id="stname" name="stname" required title="Please enter a street name.">
-                <label for="sbname">Suburb:</label>
-                <input type="text" id="sbname" name="sbname"> 
-                <br>
-                <label for="date">Pick-Up Date*:</label>
-                <input type="date" id="date" name="date" required title="Please select a pick-up date.">
-                <label for="time">Pick-Up Time*:</label>
-                <input type="time" id="time" name="time" required title="Please select a pick-up time.">
+				<label for="unumber">Unit Number:</label>
+				<input type="text" id="unumber" name="unumber">
+				<label for="snumber">Street Number*:</label>
+				<input type="text" id="snumber" name="snumber" required title="Please enter a street number.">
+				<label for="stname">Street Name*:</label>
+				<input type="text" id="stname" name="stname" required title="Please enter a street name.">
+				<label for="sbname">Suburb:</label>
+				<input type="text" id="sbname" name="sbname">
+				<br>
+				<label for="date">Pick-Up Date*:</label>
+				<input type="date" id="date" name="date" required title="Please select a pick-up date.">
+				<label for="time">Pick-Up Time*:</label>
+				<input type="time" id="time" name="time" required title="Please select a pick-up time.">
                 
-                <h3>Dropoff Details</h3>
-                <label for="dsbname">Destination Suburb:</label>
-                <input type="text" id="dsbname" name="dsbname">
-                
-                <button type="submit">Submit Booking</button>
-            </form>
-        </div>
-
-        <!-- Footer Section -->
-        <footer>
-            <div class="footer-content">
-                <!-- Copyright Section -->
-                <div class="footer-copy">
-                    <p>&copy; <script>
-                            var CurrentYear = new Date().getFullYear();
-                            document.write(CurrentYear);
-                        </script> Thomas Brears | <a href="github.com/thomasbrears/assign2"> Github Repo</a>
-                    </p>
-                </div>
-            </div>
-        </footer>  
-    </body>
+				<h3>Dropoff Details</h3>
+				<label for="dsbname">Destination Suburb:</label>
+				<input type="text" id="dsbname" name="dsbname">
+				<button type="submit">Submit Booking</button>
+				<!-- Submit booking request form -->
+			</form>
+		</div>
+        
+		<!-- Footer Section -->
+		<footer>
+			<div class="footer-content">
+				<!-- Copyright Section -->
+				<div class="footer-copy">
+					<p>&copy; <script>
+							var CurrentYear = new Date().getFullYear();
+							document.write(CurrentYear);
+						</script> Thomas Brears | <a href="github.com/thomasbrears/assign2"> Github Repo</a>
+					</p>
+				</div>
+			</div>
+		</footer>
+	</body>
 </html>

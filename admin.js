@@ -1,48 +1,56 @@
+// Function to seach for a booking based on the users input
 function searchBookings() {
-    let input = document.querySelector('input[name="bsearch"]').value;
-    const resultsDiv = document.getElementById('results');
-    const errorMessageDiv = document.getElementById('errorMessage');
+	// Retrive the input from the bsearch field.
+	let input = document.querySelector('input[name="bsearch"]').value;
+	const resultsDiv = document.getElementById('results');
+	const errorMessageDiv = document.getElementById('errorMessage');
 
-    fetch('admin.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'bsearch=' + encodeURIComponent(input)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok.');
-        }
-        return response.json();
-    })
-    .then(data => {
-        if (data.error) {
-            errorMessageDiv.textContent = data.error;
-            errorMessageDiv.style.display = 'block';
-            resultsDiv.innerHTML = '';
-        } else if (data.length > 0) {
-            const table = createResultsTable(data);
-            resultsDiv.innerHTML = '';
-            resultsDiv.appendChild(table);
-            errorMessageDiv.style.display = 'none';
-        } else {
-            errorMessageDiv.textContent = data.message || 'No bookings found.';
-            errorMessageDiv.style.display = 'block';
-            resultsDiv.innerHTML = '';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        errorMessageDiv.textContent = error.message || 'Error loading bookings.';
-        errorMessageDiv.style.display = 'block';
-        resultsDiv.innerHTML = '';
-    });
+	// preform an AJAX request to the server
+	fetch('admin.php', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: 'bsearch=' + encodeURIComponent(input) // send input with request
+		})
+		.then(response => {
+			// check if the server responce was successfull or not
+			if (!response.ok) {
+				throw new Error('The network response was not ok. Please try again later');
+			}
+			return response.json(); // Parse JSON data from the response.
+		})
+		.then(data => {
+			// handle data returned from the server
+			if (data.error) { // display error message if there was an issue
+				errorMessageDiv.textContent = data.error;
+				errorMessageDiv.style.display = 'block';
+				resultsDiv.innerHTML = '';
+			} else if (data.length > 0) { // display the table if data is returned
+				const table = createResultsTable(data);
+				resultsDiv.innerHTML = '';
+				resultsDiv.appendChild(table);
+				errorMessageDiv.style.display = 'none';
+			} else { // Display relevent error message if no bookings were found
+				errorMessageDiv.textContent = data.message || 'No bookings found.';
+				errorMessageDiv.style.display = 'block';
+				resultsDiv.innerHTML = '';
+			}
+		})
+		.catch(error => { // display and log any fetch errors
+			console.error('Error:', error);
+			errorMessageDiv.textContent = error.message || 'Error loading bookings.';
+			errorMessageDiv.style.display = 'block';
+			resultsDiv.innerHTML = '';
+		});
 }
 
+// function to create the booking data table
 function createResultsTable(bookings) {
-    const table = document.createElement('table');
-    table.innerHTML = `<tr>
+	const table = document.createElement('table');
+
+	// table titles
+	table.innerHTML = `<tr>
         <th>Booking Reference Number</th>
         <th>Customer Name</th>
         <th>Phone</th>
@@ -53,9 +61,10 @@ function createResultsTable(bookings) {
         <th>Assignment</th>
     </tr>`;
 
-    bookings.forEach(booking => {
-        const row = table.insertRow();
-        row.innerHTML = `
+	// booking data from db for each booking
+	bookings.forEach(booking => {
+		const row = table.insertRow();
+		row.innerHTML = `
             <td>${booking.reference}</td>
             <td>${booking.customer}</td>
             <td>${booking.phone}</td>
@@ -65,59 +74,64 @@ function createResultsTable(bookings) {
             <td>${booking.status}</td>
             <td><button class="assign-button" data-ref="${booking.reference}" onclick="assignBooking('${booking.reference}')">Assign</button></td>
         `;
-    });
+	});
 
-    return table;
+	return table;
 }
 
+// function to handle booking assignment
 function assignBooking(bookingReference) {
-    fetch('admin.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'assign=' + encodeURIComponent(bookingReference)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok.');
-        }
-        return response.json();
-    })
-    .then(data => {
-        const successMessageDiv = document.getElementById('success');
-        const errorMessageDiv = document.getElementById('errorMessage');
+	// preform post request to assign the booking
+	fetch('admin.php', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+			},
+			body: 'assign=' + encodeURIComponent(bookingReference) // send booking reference with the request
+		})
+		.then(response => {
+			// check if the server responce was successfull or not
+			if (!response.ok) {
+				throw new Error('Network response was not ok. Please try again later.');
+			}
+			return response.json(); // Parse JSON response.
+		})
+		.then(data => {
+			const successMessageDiv = document.getElementById('success');
+			const errorMessageDiv = document.getElementById('errorMessage');
+			const assignButton = document.querySelector(`button[data-ref='${bookingReference}']`); // find the button that was clicked
 
-        if (data.success) {
-            // Find the button by reference and disable it
-            const assignButton = document.querySelector(`button[data-ref='${bookingReference}']`);
-            assignButton.disabled = true;
-            assignButton.innerText = 'Assigned';
+			if (!assignButton) {
+				throw new Error('Button not found in the document.');
+			}
 
-            // Find the status cell in the same row as the button and update it
-            const row = assignButton.closest('tr');
-            const statusCell = row.cells[6];
+			if (data.success) {
+				// disable button and update the text if assignment is successful.
+				assignButton.disabled = true;
+				assignButton.innerText = 'Assigned';
 
-            if (statusCell) {
-                statusCell.textContent = 'assigned';
-            }
+				// find the relevent cell and update it
+				const row = assignButton.closest('tr');
+				const statusCell = row.cells[6];
+				if (statusCell) {
+					statusCell.textContent = 'Assigned';
+				}
 
-            // Display the success message
-            successMessageDiv.textContent = data.message;
-            successMessageDiv.style.display = 'block';
-            errorMessageDiv.style.display = 'none';
+				//display the a success message
+				successMessageDiv.textContent = data.message;
+				successMessageDiv.style.display = 'block';
+				errorMessageDiv.style.display = 'none';
 
-        } else {
-            // Display error if operation was not successful
-            errorMessageDiv.textContent = data.message;
-            errorMessageDiv.style.display = 'block';
-            successMessageDiv.style.display = 'none';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        const errorMessageDiv = document.getElementById('errorMessage');
-        errorMessageDiv.textContent = error.message || 'Error loading bookings.';
-        errorMessageDiv.style.display = 'block';
-    });
+			} else {
+				// if there was any errors, display the error message
+				errorMessageDiv.textContent = data.message;
+				errorMessageDiv.style.display = 'block';
+				successMessageDiv.style.display = 'none';
+			}
+		})
+		.catch(error => { // display and log any fetch errors
+			console.error('Error:', error);
+			errorMessageDiv.textContent = error.message || 'Error processing your request.';
+			errorMessageDiv.style.display = 'block';
+		});
 }

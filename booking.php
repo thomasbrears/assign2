@@ -1,7 +1,8 @@
 <?php
+// db connection details stored in a seperate location for security
 require_once "../../files/settings.php";
 
-// Establish database connection
+// Establish db connection
 $conn = mysqli_connect($host, $user, $pswd, $dbnm);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
@@ -10,9 +11,10 @@ if (!$conn) {
 $response = ['success' => false, 'message' => ''];
 header('Content-Type: application/json');
 
-// Collect and validate input
+// Collect the input
 $cname = isset($_POST['cname']) ? mysqli_real_escape_string($conn, trim($_POST['cname'])) : '';
 $phone = isset($_POST['phone']) ? mysqli_real_escape_string($conn, trim($_POST['phone'])) : '';
+$unumber = isset($_POST['unumber']) ? mysqli_real_escape_string($conn, trim($_POST['unumber'])) : '';
 $snumber = isset($_POST['snumber']) ? mysqli_real_escape_string($conn, trim($_POST['snumber'])) : '';
 $stname = isset($_POST['stname']) ? mysqli_real_escape_string($conn, trim($_POST['stname'])) : '';
 $sbname = isset($_POST['sbname']) ? mysqli_real_escape_string($conn, trim($_POST['sbname'])) : '';
@@ -20,6 +22,7 @@ $dsbname = isset($_POST['dsbname']) ? mysqli_real_escape_string($conn, trim($_PO
 $date = isset($_POST['date']) ? mysqli_real_escape_string($conn, trim($_POST['date'])) : '';
 $time = isset($_POST['time']) ? mysqli_real_escape_string($conn, trim($_POST['time'])) : '';
 
+// valdate these fields have input
 $missingFields = [];
 if (empty($cname)) $missingFields[] = 'Customer Name';
 if (empty($phone)) $missingFields[] = 'Phone Number';
@@ -55,8 +58,8 @@ if (!preg_match('/^\d{2}:\d{2}$/', $time) || !strtotime($time)) {
     exit;
 }
 
-// Insert data into database
-$query = "INSERT INTO bookings (cname, phone, snumber, stname, sbname, dsbname, date, time) VALUES ('$cname', '$phone', '$snumber', '$stname', '$sbname', '$dsbname', '$date', '$time')";
+// Insert the data into database
+$query = "INSERT INTO bookings (cname, phone, snumber, stname, sbname, dsbname, unumber, date, time) VALUES ('$cname', '$phone', '$snumber', '$stname', '$sbname', '$dsbname', '$unumber', '$date', '$time')";
 if (mysqli_query($conn, $query)) {
     $last_id = mysqli_insert_id($conn);
     // Format the booking number
@@ -64,10 +67,11 @@ if (mysqli_query($conn, $query)) {
     // Format the date from YYYY-MM-DD to DD/MM/YYYY
     $dateObject = DateTime::createFromFormat('Y-m-d', $date);
     $formattedDate = $dateObject ? $dateObject->format('d/m/Y') : 'invalid date';
-    // Success response with formatted date and time
+    // Success message
     $response['success'] = true;
     $response['message'] = "Booking Scheduled.<br>Thank you for your booking, $cname!<br>Your Booking reference number is $booking_number<br>Pick-up scheduled for $time (Pickup time) on $formattedDate (Pickup date).";
 } else {
+    // error message
     $response['message'] = "Error: " . mysqli_error($conn);
 }
 

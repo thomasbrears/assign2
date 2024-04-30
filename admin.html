@@ -12,52 +12,48 @@
 		<!-- Styling -->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 		<link rel="stylesheet" href="style.css">
+		<!-- Java Script files -->
+		<script src="script.js" defer></script>
+		<script src="admin.js"></script>
 	</head>
     
-    <body>
-	   <!-- Navigation Bar -->
-        <nav id="navbar">
-          <div class="nav-container">
-            <span class="brand-name"> CabsOnline </span>
-            <div class="menu-icon" onclick="toggleMenu()">
-              <i class="fa fa-bars"></i>
-            </div>
-            <div class="nav-links">
-              <a href="booking.html">Make a Booking</a>
-              <a href="about.html">About</a>
-              <a target="_blank" href="github.com/thomasbrears/assign2">Github Repo</a>
-            </div>
-          </div>
-        </nav>
+	<body>
+		<!-- Navigation Bar -->
+		<nav id="navbar">
+			<div class="nav-container">
+				<span class="brand-name"> CabsOnline </span>
+				<div class="menu-icon" onclick="toggleMenu()">
+					<i class="fa fa-bars"></i>
+				</div>
+				<div class="nav-links">
+					<a href="booking.html">Make a Booking</a>
+					<a target="_blank" href="readme.txt">About</a>
+					<a target="_blank" href="https://github.com/thomasbrears/assign2">Github Repo</a>
+				</div>
+			</div>
+		</nav>
         
-        <div class="content">
-            <h2>Admin Dashboard</h2>
-            <input type="text" name="bsearch" placeholder="Enter booking reference or leave empty">
-            <input type="button" name="sbutton" value="Search Bookings" onclick="searchBookings();">
-            
-            <div id="success" class="success-message" style="display: none;"></div>
-            <div id="errorMessage" class="error-message" style="display: none;"></div>
-            <div id="results" class="results-container"></div>
-            
-            
-        </div>
-
-        <!-- Footer Section -->
-        <footer>
-            <div class="footer-content">
-                <!-- Copyright Section -->
-                <div class="footer-copy">
-                    <p>&copy; <script>
-                            var CurrentYear = new Date().getFullYear();
-                            document.write(CurrentYear);
-                        </script> Thomas Brears | <a href="github.com/thomasbrears/assign2"> Github Repo</a>
-                    </p>
-                </div>
-            </div>
-        </footer>  
+		<div class="content">
+			<h2>Admin Dashboard</h2>
+			<input type="text" name="bsearch" placeholder="Enter booking reference or leave it empty"><!-- Booking Search input-->
+			<input type="button" name="sbutton" value="Search Bookings" onclick="searchBookings();"><!-- Booking Search button-->
+			<div id="success" class="success-message" style="display: none;"></div><!-- Success Message Placeholder -->
+			<div id="errorMessage" class="error-message" style="display: none;"></div><!-- Error Message Placeholder -->
+			<div id="results" class="results-container"></div><!-- Booking Result Placeholder -->
+		</div>
         
-        <!-- Java Script files -->
-		<script src="script.js" defer></script>
-        <script src="admin.js"></script>
-    </body>
+		<!-- Footer Section -->
+		<footer>
+			<div class="footer-content">
+				<!-- Copyright Section -->
+				<div class="footer-copy">
+					<p>&copy; <script>
+							var CurrentYear = new Date().getFullYear();
+							document.write(CurrentYear);
+						</script> Thomas Brears | <a href="github.com/thomasbrears/assign2"> Github Repo</a>
+					</p>
+				</div>
+			</div>
+		</footer>
+	</body>
 </html>
