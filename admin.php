@@ -1,4 +1,10 @@
 <?php
+/* COMP721: Web Development
+ * Assignment 2: CabsOnline Website
+ * Thomas Brears, #20122554, fcx9443 
+ * admin.php - Manages input validation and database interactions. It retrieves and updates records, returning data, success, or error messages accordingly.
+ */
+
 // db connection details stored in a seperate location for security
 require_once "../../files/settings.php";
 

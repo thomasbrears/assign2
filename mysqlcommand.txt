@@ -1,3 +1,9 @@
+COMP721: Web Development
+Assignment 2: CabsOnline Website
+Thomas Brears, #20122554, fcx9443 
+mysqlcommand.txt - Contains all MySQL queries used across the program for table creation, data insertion, updates, and searches.
+
+
 CREATE TABLE bookings (
     id INT AUTO_INCREMENT PRIMARY KEY,
     cname VARCHAR(255) NOT NULL,

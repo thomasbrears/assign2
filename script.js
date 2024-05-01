@@ -1,7 +1,8 @@
 /* COMP721: Web Development
-   Assignment 2: Social Networking, Status Posting Website
-   Thomas Brears, #20122554, fcx9443 
-*/
+ * Assignment 2: CabsOnline Website
+ * Thomas Brears, #20122554, fcx9443 
+ * script.js - Manages the styling of the entire website to ensure a consistent style across the site and enhances mobile responsiveness.
+ */
 
 // Function to close the mobile menu
 function closeMenu() {

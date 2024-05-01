@@ -1,3 +1,8 @@
+/* COMP721: Web Development
+ * Assignment 2: CabsOnline Website
+ * Thomas Brears, #20122554, fcx9443 
+ * booking.js - Handles the creation of bookings by capturing form input and sending it to booking.php for processing. It ensures that only trips for today or in the future can be booked by automatically updating the minimum date and time.
+ */
 // Listen for the DOMContentLoaded event to ensure all elements are fully loaded before executing the script
 document.addEventListener('DOMContentLoaded', function() {
 	const form = document.getElementById('bookingForm');

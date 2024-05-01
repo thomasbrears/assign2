@@ -1,3 +1,8 @@
+/* COMP721: Web Development
+ * Assignment 2: CabsOnline Website
+ * Thomas Brears, #20122554, fcx9443 
+ * admin.js - Handles booking searches and assignments, interfacing with admin.php. It processes input, displays relevant data and messages, and manages the assignment of bookings when the assign button is pressed.
+ */
 // Function to seach for a booking based on the users input
 function searchBookings() {
 	// Retrive the input from the bsearch field.
