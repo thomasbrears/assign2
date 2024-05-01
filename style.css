@@ -2,7 +2,6 @@
    Assignment 2
    Thomas Brears, #20122554, fcx9443 
 */
-
 /* CSS variables at root level for easy changing and redusing repetitiiveness */
 :root {
     --border-style: 1px solid #333333; /* Lighter dark grey */
@@ -15,74 +14,87 @@
 }
 
 body {
-    margin: auto;
+	margin:auto;
+	text-align:center;
+	background-color:#121212; /* Black */
+	color:var(--text-color);
+	font-family:Arial,sans-serif;
+	line-height:inherit;
+	padding-top:50px;
+}
+p{
     text-align: center;
-    background-color: #121212; /* Black */
-    color: var(--text-color);
-    font-family: Arial, sans-serif;
-    line-height: inherit;
-    padding-top: 50px;
 }
-
-#navbar, .navbar-container, footer, .content {
-    max-width: none;
+#navbar,.navbar-container,footer {
+	max-width:none;
 }
-
 /* Navigation */
 #navbar {
-    background: #222222; /* Dark Grey */
-    border-bottom: var(--border-style);
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    transition: top var(--transition-speed);
-    box-shadow: 0 2px 5px rgba(150, 150, 150, 0.2); /* Lightish grey shadow */
+	background:#222222; /* Dark Grey */
+	border-bottom:1px solid #222222; /* Dark Grey */
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	z-index:1000;
+	transition:top 0.3s;
+	box-shadow:0 2px 5px rgba(150,150,150,0.2); /* Lightish grey shaddow */
 }
-
 .nav-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5em 2em;
+	display:flex;
+	justify-content:space-between;
+	align-items:center;
+	padding:0.5em 2em;
+	max-width:1200px;
+	margin:auto;
+	width:100%;
 }
-
-.menu-icon { /* Hidden by default, will be shown in media query for smaller screens */
-    display: none;
-    cursor: pointer;
+.menu-icon { /* Hidden by default, will be shown in media query for smaller screens*/
+	display:none;
+    cursor:pointer;
 }
-
-.brand-name, .nav-links a {
-    font-size: 1em;
-    font-weight: bold;
-    color: var(--text-color);
+.brand-name {
+	font-size:1.2em;
+	font-weight:bold;
+	margin-right:auto;
 }
-
 .nav-links {
-    display: flex;
-    align-items: center;
+	display:flex;
+	align-items:center;
 }
-
 .nav-links a {
-    padding: 0 0.75em;
-    text-decoration: none;
-    transition: color var(--transition-speed);
+	padding:0 0.75em;
+	text-decoration:none;
+	color:var(--text-color);
+	font-size:1em;
 }
-
-.nav-links a:hover, .nav-links a.active {
-    color: var(--button-bg);
+.nav-links a:hover {
+	color:var(--button-bg);
+	transition:color var(--transition-speed);
 }
-
-/* General styles for containers and text */
-.content, .flex-container, footer {
-    background: var(--background-color);
-    color: var(--text-color);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(150, 150, 150, 0.2);
-    margin: auto;
-    width: auto;
+.nav-links a.active {
+	color:var(--button-bg);
+	border-bottom:2px solid #009688; /* Teal */
+}
+.flex-container {
+	display:flex;
+	flex-wrap:wrap;
+	gap:20px;
+	justify-content:center;
+	align-items:flex-start;
+}
+/* general sections */
+.content {
+	background:#222222; /* Dark Grey */
+	border-radius:10px;
+    box-shadow:0 2px 5px rgba(150,150,150,0.2); /* Lightish grey shaddow */	
+    padding:20px;
+    max-width:1000px;
+	margin: 50px auto; /* Top and bottom margins 50px and left and right margins auto */
+}
+.content p {
+	text-align:left;
+	line-height:1.2;
 }
 
 /* Table Styles */
@@ -96,113 +108,246 @@ th, td {
     text-align: center;
     padding: 8px;
     border-bottom: 1px solid #444444;
+    color: var(--text-color);
 }
 
 th {
     background-color: var(--background-color);
 }
 
-/* Form and Input Styles */
-.booking-form, .booking-form label, .booking-form h2, .booking-form p,
-input[type="text"], input[type="date"], input[type="time"], input[type="button"],
-button {
+/* Form Styles */
+.booking-form {
+    padding: 20px;
+}
+
+.booking-form h2 {
+    color: var(--text-color);
+}
+
+.booking-form p {
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+.booking-form label {
+    display: inline-block;
+    width: 150px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.booking-form input[type="text"],
+.booking-form input[type="date"],
+.booking-form input[type="time"] {
+    width: calc(30%);
     padding: 10px;
+    margin-bottom: 20px;
+    border: var(--border-style);
     border-radius: 4px;
     background-color: var(--background-color);
     color: var(--text-color);
-    border: var(--border-style);
+    display: inline-block;
+    vertical-align: middle;
 }
 
-.booking-form button[type="submit"], input[type="button"], button {
+.booking-form button[type="submit"], 
+input[type="button"]{
     background-color: var(--button-bg);
     color: var(--button-text-color);
-    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    width: 100%;
     transition: background-color var(--transition-speed);
 }
 
-input[type="button"]:hover, button:hover {
-    background-color: var(--hover-bg-color);
+.booking-form button[type="submit"]:hover, 
+input[type="button"]:hover{
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
+/* Input Styles */
+input[type="text"],
+input[type="button"] {
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 5px;
+    border-radius: 5px;
+    border: var(--border-style);
+    background-color: var(--background-color);
+    color: var(--text-color);
+    width: calc(50% - 22px); /* Adjust width as per design */
+}
+
+input[type="button"] {
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+input[type="button"]:hover{
+    background-color: var(--hover-bg-color);
+    color: var(--text-color);
+}
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text-color);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed);
+}
+button:hover {
+    background-color: var(--hover-bg-color);
+    color: var(--text-color);
+}
 /* Link styling */
 a {
     color: var(--text-color);
-    text-decoration: none;
 }
-
 a:hover {
     color: var(--button-bg);
+    text-decoration: none;
 }
-
-/* Success/Error message styling */
-.success-message, .error-message {
+/* Success/Error message */
+.success-message {
+    color: var(--button-text-color);
+    background-color: #71FF69; /* Light Green */
     padding: 10px;
     border-radius: 4px;
     width: auto;
 }
 
-.success-message {
-    background-color: #71FF69; /* Light Green */
-}
-
 .error-message {
+    color: var(--text-color);
     background-color: #D8000C; /* Red */
-    margin: 20px !important;
+    margin: 20px!important;
+    padding: 10px; 
+    border-radius: 4px;
+    width: auto;
 }
 
-/* Media Queries for smaller screens */
-@media (max-width: 768px) {
+/* Footer Styles */
+footer {
+	background:#222222; /* Dark Grey */
+	color:var(--text-color);
+	padding:20px 0;
+	text-align:center;
+}
+footer .footer-content h2 {
+	font-size:2em;
+	margin-bottom:0.5em;
+}
+footer .footer-content p {
+	font-size:1em;
+	margin-bottom:1em;
+}
+footer .footer-nav {
+	margin-bottom:1em;
+}
+/* Footer Styles */
+footer {
+	background:#222222; /* Dark Grey */
+	color:var(--text-color);
+	padding:20px 0;
+	width:100%;
+}
+.footer-content {
+	width:100%;
+}
+.footer-container {
+	justify-content:space-between;
+	align-items:center;
+	max-width:1000px;
+	margin:auto;
+	padding:0 20px;
+}
+.footer a {
+	color:var(--text-color);
+	text-decoration:none;
+	margin-top:20px;
+	margin-right:4px;
+	padding:5px;
+	transition:color var(--transition-speed);
+	text-align:right;
+}
+.footer a:hover {
+	color:var(--button-bg);
+}
+.footer-copy {
+	text-align:center;
+	width:100%;
+	margin-top:20px;
+}
+
+/* For smaller screens ie virtical tablet and mobile */
+@media (max-width:768px) {
     .nav-container {
-        flex-direction: column;
-        padding: 0.4em 1em;
+        flex-direction:column;
+        justify-content:space-between;
+        align-items:flex-start;
+        padding:0.4em 1em;
     }
-
     .menu-icon {
-        display: block;
-        position: absolute;
-        right: 10px;
-        top: 10px;
+        display:block;
+        position:absolute;
+        right:15px;
+        top:auto;
+        font-size: 20px;
     }
-
     .brand-name {
-        margin-right: 0;
-    }
-
+      font-size: 20px;
+     }
     .nav-links {
-        display: none;
-        width: 100%;
+        display:none;
+        width:100%;
+        align-items:center;
     }
-
     .nav-links.active {
-        display: flex;
-        flex-direction: column;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+    }
+    .nav-links a {
+        text-align:center;
+        padding:0.5em;
+        border-bottom:none;
+        width:100%;
+    }
+    header, section {
+        margin:10px;
+    }
+    footer {
+        margin-top: 25px;
+    }
+    .content{
+        padding:20px;
+        margin:10px;
+    }
+    .footer-container {
+        padding:0 40px;
+    }
+    .footer a {
+        padding:5px 10px;
+    }
+    .footer-copy {
+        margin-top:0;
     }
 
-    .nav-links a {
-        text-align: center;
-        padding: 0.5em;
+    .booking-form input[type="text"],
+    .booking-form input[type="date"],
+    .booking-form input[type="time"] {
         width: 100%;
     }
 
-    .content, .footer-container {
-        padding: 20px;
-    }
-    
-    footer {
-    margin-top: 20px;
-    }
-    
-    input[type="text"], input[type="date"], input[type="time"], input[type="button"], button {
-    width: 80%; 
-    padding: 12px;
-    margin-bottom: 20px;
-    border-color: var(--text-color);
-    }
 }
-
-@media (min-width: 1200px) {
-    header, section, footer {
-        margin: auto;
+/* For smaller screens ie landscape tablets or muilty tasking */
+}@media (min-width:1200px) {
+        header,section,footer {
+        margin-left:auto;
+        margin-right:auto;
     }
 }
