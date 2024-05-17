@@ -16,7 +16,7 @@ if (!$conn) {
 $response = ['success' => false, 'message' => ''];
 header('Content-Type: application/json');
 
-// Collect the input
+// Collect the submision input
 $cname = isset($_POST['cname']) ? mysqli_real_escape_string($conn, trim($_POST['cname'])) : '';
 $phone = isset($_POST['phone']) ? mysqli_real_escape_string($conn, trim($_POST['phone'])) : '';
 $unumber = isset($_POST['unumber']) ? mysqli_real_escape_string($conn, trim($_POST['unumber'])) : '';
@@ -27,7 +27,7 @@ $dsbname = isset($_POST['dsbname']) ? mysqli_real_escape_string($conn, trim($_PO
 $date = isset($_POST['date']) ? mysqli_real_escape_string($conn, trim($_POST['date'])) : '';
 $time = isset($_POST['time']) ? mysqli_real_escape_string($conn, trim($_POST['time'])) : '';
 
-// valdate these fields have input
+// Valdate the required fields have input
 $missingFields = [];
 if (empty($cname)) $missingFields[] = 'Customer Name';
 if (empty($phone)) $missingFields[] = 'Phone Number';
@@ -63,13 +63,13 @@ if (!preg_match('/^\d{2}:\d{2}$/', $time) || !strtotime($time)) {
     exit;
 }
 
-// Insert the data into database
+// Insert the data into database table
 $query = "INSERT INTO bookings (cname, phone, snumber, stname, sbname, dsbname, unumber, date, time) VALUES ('$cname', '$phone', '$snumber', '$stname', '$sbname', '$dsbname', '$unumber', '$date', '$time')";
 if (mysqli_query($conn, $query)) {
     $last_id = mysqli_insert_id($conn);
-    // Format the booking number
+    // Format the booking number for display
     $booking_number = "BRN" . sprintf('%05d', $last_id);
-    // Format the date from YYYY-MM-DD to DD/MM/YYYY
+    // Format the date from YYYY-MM-DD to DD/MM/YYYY for display
     $dateObject = DateTime::createFromFormat('Y-m-d', $date);
     $formattedDate = $dateObject ? $dateObject->format('d/m/Y') : 'invalid date';
     // Success message
@@ -77,7 +77,7 @@ if (mysqli_query($conn, $query)) {
     $response['message'] = "Booking Scheduled.<br>Thank you for your booking, $cname!<br>Your Booking reference number is $booking_number<br>Pick-up scheduled for $time (Pickup time) on $formattedDate (Pickup date).";
 } else {
     // error message
-    $response['message'] = "Error: " . mysqli_error($conn);
+    $response['message'] = "There was an issue making your booking: " . mysqli_error($conn);
 }
 
 

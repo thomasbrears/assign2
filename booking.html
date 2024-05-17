@@ -45,9 +45,9 @@
 			<form id="bookingForm" class="booking-form" method="post">
 				<h3>Customer Details</h3>
 				<label for="cname">Customer Name*:</label>
-				<input type="text" id="cname" name="cname" required pattern="^[a-zA-Z]{2,}\s[a-zA-Z]{2,}$" title="Please enter your first and last name. Only characters are accepted">
+				<input type="text" id="cname" name="cname" required pattern="^[a-zA-Z]{2,}\s[a-zA-Z]{2,}$" title="Please enter your first and last name. Only characters are accepted"> <!-- Name input with form validation for 2char space 2char -->
 				<label for="phone">Phone Number*:</label>
-				<input type="text" id="phone" name="phone" pattern="[0-9]{10,12}" required title="Please enter a valid phone number with 10 to 12 digits.">
+				<input type="text" id="phone" name="phone" pattern="[0-9]{10,12}" required title="Please enter a valid phone number with 10 to 12 digits."> <!-- Phone number input with form validation for numbers only -->
 				
                 <h3>Pickup Details</h3>
 				<label for="unumber">Unit Number:</label>
@@ -67,8 +67,8 @@
 				<h3>Dropoff Details</h3>
 				<label for="dsbname">Destination Suburb:</label>
 				<input type="text" id="dsbname" name="dsbname">
-				<button type="submit">Submit Booking</button>
-				<!-- Submit booking request form -->
+                
+				<button type="submit">Submit Booking</button><!-- Submit booking request form button-->
 			</form>
 		</div>
         
