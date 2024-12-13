@@ -1,8 +1,24 @@
-<!-- COMP721: Web Development
-     Assignment 2: CabsOnline Website
-     Thomas Brears, #20122554, fcx9443 
-     readme.txt - Includes a description of each file within the system and instructions on how to use it.
--->
+# Assignment 2: Cabs Online: Simple booking and assigning system for cabs
+# COMP721: Web Development
+
+Created by Thomas Brears in May 2024
+Student ID #20122554
+Network ID fcx9443 
+
+This was created for an assignment at the Auckland University of Technology (AUT) and features a responsive design with status submission to the database from the HTML form through a PHP file with validation and SQL commands. The results are then searchable using a similar method (HTML form, PHP and SQL before outputing in HTML).
+
+**Access url: http://cabsonline.great-site.net/cabsonline/booking.html**
+
+## License
+Copyright 2024 Thomas Brears
+
+NO Permission is granted to this or copys of this software and associated documentation files (the “Software”). No rights to use, copy, modify, merge, publish, distribute, and/or sublicense copies of the Software.
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+
+
+
 
 SYSTEM FILES
 
@@ -39,8 +55,8 @@ Manages the styling of the entire website to ensure a consistent style across th
 
 HOW TO USE THE SYSTEM
 There are two user interactable pages on the website.
-Booking page: https://webdev.aut.ac.nz/~fcx9443/assign2/booking.html
-Admin dashboard: https://webdev.aut.ac.nz/~fcx9443/assign2/admin.html
+Booking page: http://cabsonline.great-site.net/cabsonline/booking.html
+Admin dashboard: http://cabsonline.great-site.net/cabsonline/admin.html
 
 TO MAKE A BOOKING (Booking System)
 Navigate to the booking page where you will find a form. 
